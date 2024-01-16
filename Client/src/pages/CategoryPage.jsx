@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import axios from "axios";
-
 const CategoryPage = () => {
   const [categoryName, setCategoryName] = useState("");
   const [getCata, setGetCata] = useState([]);
-  const [checkSubCata, setCheckSubCata] = useState([]);
   const [subForm, setSubForm] = useState({
     "name": "",
     "parentCategoryId": "",

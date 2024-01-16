@@ -1,4 +1,5 @@
 const express = require ("express");
+const path = require('path');
 const dotenv = require("dotenv")
 const connnectDB = require("./Utils/dbConfig")
 const cookieParser = require("cookie-parser");
@@ -14,6 +15,7 @@ app.use(cors())
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended:true}));
+app.use( express.static(path.join(__dirname, 'public')));
 
 app.use("/",Router);
 

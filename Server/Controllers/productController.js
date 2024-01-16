@@ -5,6 +5,7 @@ const addProduct = async (req, res) => {
   try {
     const { title, ram, price, total, subcategory, category, description } =
       req.body;
+      console.log(req.body)
 
     // Validate required fields
     if (!title || !ram || !price || !subcategory || !category || !description) {
@@ -114,6 +115,8 @@ const addSubcategoriesWithNestedCategories = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+
 
 module.exports = {
   addProduct,

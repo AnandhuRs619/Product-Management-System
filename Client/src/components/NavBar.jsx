@@ -1,40 +1,43 @@
 import React from "react";
-// import { Link } from "react-router-dom";
-// import { useNavigate } from "react-router-dom"
-// import { Box, Flex, Input, Button } from '@chakra-ui/react';
-
+import { Link } from "react-router-dom";
+import { FaPlusCircle } from 'react-icons/fa';
 
 const NavBar = () => {
-    return (
-        <>
-        <div className="bg-[#003F62]">
-          <div className="w-[75%] mx-auto h-[90px] mt-4 flex items-center justify-between">
-            <div className="w-full" >
-              <div className="flex items-center justify-center  ">
-                <h1>My App</h1>
-                <div className="bg-white w-[280px] p-2 rounded relative">
-                  <input
-                    className="border-none w-full"
-                    type="text"
-                    placeholder="Search anything"
-                  />
-                  <div className="absolute inset-y-0 right-0 flex items-center justify-center bg-[#EDA415] w-[60px] rounded-bl-md">
-                    <button>Search</button>
-                  </div>
-                </div>
+  return (
+    <>
+      <div className="bg-[#3f72ff] p-4">
+        <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
+          <div className="flex items-center mb-4 md:mb-0">
+            <h1 className="text-white text-2xl font-semibold">My App</h1>
+            <div className="bg-white ml-4 p-2 rounded relative">
+              <input
+                className="border-none w-full"
+                type="text"
+                placeholder="Search anything"
+              />
+              <div className="absolute inset-y-0 right-0 flex items-center justify-center bg-[#EDA415] w-[60px] rounded-bl-md">
+                <button className="text-white">Search</button>
               </div>
             </div>
-            <div className="text-right flex gap-x-3">
-             
-  
-             
-            </div>
+          </div>
+          <div className="text-right flex flex-col items-center md:flex-row gap-x-4">
+            {/* Add Product Button */}
+            <Link to="/addproductpage">
+              <button className="p-2 mt-2 md:mt-0 rounded text-white shadow bg-[#EDA415] px-6 flex items-center">
+                <FaPlusCircle className="mr-2" /> Add Product
+              </button>
+            </Link>
+            {/* Add Category Button */}
+            <Link to="/categorypage">
+              <button className="p-2 mt-2 md:mt-0 rounded text-white shadow bg-[#EDA415] px-6 flex items-center">
+                <FaPlusCircle className="mr-2" /> Add Category
+              </button>
+            </Link>
           </div>
         </div>
-        {/* <Single whishlist={isWhishlist} /> */}
-      </>
-      );
-    };
-    
+      </div>
+    </>
+  );
+};
 
-export default NavBar
+export default NavBar;

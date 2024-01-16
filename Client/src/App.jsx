@@ -2,6 +2,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home  from './pages/Home';
 import CategoryPage from "./pages/CategoryPage";
+import AddProductPage from "./pages/AddProductPage";
 
 function App() {
   
@@ -11,10 +12,11 @@ function App() {
       <Routes>
       <Route path ="/" element={<Home/>}  />
       <Route path ="/categorypage" element={<CategoryPage/>}  />
+      <Route path ="/addproductpage" element={<AddProductPage/>}  />
         
       </Routes>
     </Router>
-      <h1 className="text-red-500" >hello</h1>
+      
     </div>
   )
 }
