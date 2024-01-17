@@ -3,12 +3,12 @@ const { Category} = require("../Models/categoryModel");
 
 const addProduct = async (req, res) => {
   try {
-    const { title, ram, price, total, subcategory, category, description } =
+    const { title, ram, price, total, subcategory,subSubcategory, category, description } =
       req.body;
       console.log(req.body)
 
     // Validate required fields
-    if (!title || !ram || !price || !subcategory || !category || !description) {
+    if (!title || !ram || !price || !subcategory || !subSubcategory || !category || !description) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
@@ -27,6 +27,7 @@ const addProduct = async (req, res) => {
       price,
       total,
       subcategory,
+      sub_subcategory:subSubcategory,
       category,
       description,
       imagePath: imagePaths,
@@ -46,7 +47,8 @@ const getProduct = async (req, res) => {
       const productData = await productModel
         .find()
         .populate('subcategory')
-        .populate('category');
+        .populate('category')
+        .populate('sub_subcategory');
   
       console.log(productData);
   

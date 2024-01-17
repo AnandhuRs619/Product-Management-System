@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
+
+import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import "./product.css";
-import { useEffect, useState } from "react";
 
 const Cards = ({ data }) => {
   const [pageNumber, setPageNumber] = useState(0);
@@ -24,7 +25,7 @@ const Cards = ({ data }) => {
     for (let i = 0; i < currentItems.length; i += perPage) {
       const row = currentItems.slice(i, i + perPage).map((product) => (
         <div key={product.id} className=" ml-10 max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden mb-4 mt-10">
-          <div className="md:flex">
+          <div className="md:flex ">
             <div className="md:flex-shrink-0">
               <img className="h-48 mt-5 w-full object-cover md:w-48" src={`http://localhost:5000/images/${product.imagePath[0]}`} alt={product.title} />
             </div>
@@ -34,8 +35,11 @@ const Cards = ({ data }) => {
                 <p className="mt-2 text-gray-500">
                   {product.description.length > 15 ? `${product.description.substring(0, 15)}...` : product.description}
                 </p>
-                <div className="mt-2 uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+                <div className="mt-2 uppercase tracking-wide text-md text-indigo-500 font-semibold">
                   {product.subcategory ? product.subcategory.name : 'null'}
+                </div>
+                <div className="mt-2 uppercase tracking-wide text-xs text-indigo-500 ">
+                  {product.sub_subcategory ? product.sub_subcategory.name : 'null'}
                 </div>
                 <div className="mt-4">
                   <span className="text-gray-500">Price: ₹ {product.price}</span>
@@ -74,7 +78,7 @@ const Cards = ({ data }) => {
   return (
     <div>
       {renderCardsInRows()}
-      <div className="flex gap-x-4 justify-between mt-11 mr-12">
+      <div className="flex gap-x-4 justify-between mt-11 ml-10 mr-12">
         <p className="text-base text-gray-500">{perPage} of {data.length} items</p>
         <ReactPaginate
           pageCount={pageNumber}

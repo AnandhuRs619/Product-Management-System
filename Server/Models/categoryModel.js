@@ -11,7 +11,7 @@ const categorySchema = new mongoose.Schema({
     default: false,
   },
   subcategories: [{ type: mongoose.Schema.Types.ObjectId, ref: "Category" }],
-  // Add more fields specific to categories if needed
+  
 });
 
 const Category = mongoose.model("Category", categorySchema);

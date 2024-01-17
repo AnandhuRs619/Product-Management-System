@@ -8,12 +8,13 @@ import { useNavigate } from 'react-router-dom';
 const AddProductPage = () => {
     const [productName, setProductName] = useState('');
     const [description, setDescription] = useState('');
-    const [productImages, setProductImages] = useState([]); // Change to an array for multiple images
+    const [productImages, setProductImages] = useState([]); 
     const [price, setPrice] = useState('');
     const [total, setTotal] = useState('');
     const [ram, setRam] = useState('');
     const [category, setCategory] = useState('');
     const [subcategory, setSubcategory] = useState('');
+    const [subSubcategory, setSubSubcategory] = useState('');
     const { categoryData } = useProductfetch();
     const navigate = useNavigate();
   
@@ -25,8 +26,9 @@ const AddProductPage = () => {
         formData.append('title', productName);
         formData.append('ram', ram);
         formData.append('price', price);
-        formData.append('subcategory', subcategory);
         formData.append('category', category);
+        formData.append('subcategory', subcategory);
+        formData.append('subSubcategory', subSubcategory);
         formData.append('description', description);
         formData.append('total',total);
   
@@ -107,7 +109,7 @@ const AddProductPage = () => {
                 />
               </div>
             </div>
-          {/* Display added images in a row */}
+          
           <div className="mt-4 flex flex-wrap">
             {productImages.map((image, index) => (
               <div key={index} className="relative mr-2 mb-2">
@@ -206,6 +208,26 @@ const AddProductPage = () => {
                   ))}
           </select>
         </div>
+        <div>
+            <label htmlFor="subSubcategory" className="block text-sm font-medium text-gray-600">
+              Sub-subcategory
+            </label>
+            <select
+              id="subSubcategory"
+              name="subSubcategory"
+              value={subSubcategory}
+              onChange={(e) => setSubSubcategory(e.target.value)}
+              className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+            >
+                          <option value="">Select Subcategory</option>
+            {categoryData.map((items, i) => (
+                    <option key={i} value={items?._id}>
+                      {" "}
+                      {items?.name}
+                    </option>
+                  ))}
+            </select>
+          </div>
       </div>
       <button
         type='submit'

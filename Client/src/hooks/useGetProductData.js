@@ -40,10 +40,13 @@ const  useProductfetch = () => {
  
 
   useEffect(() => {
-    fetchProductData();
-    fateCategoryData();
+    const fetchData = async () => {
+      await fateCategoryData();
+      fetchProductData();
+    };
+  
+    fetchData();
   }, []);
-
 
 
 //   const body = {

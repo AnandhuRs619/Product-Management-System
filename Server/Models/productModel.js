@@ -17,20 +17,26 @@ const productSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  category: {
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Category', 
+    required: true,
+  },
   subcategory: {
-    type: mongoose.Schema.Types.ObjectId, // Update to ObjectId type
-    ref: 'Category', // Reference to the 'Category' model
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Category', 
+    required: true,
+  },
+  sub_subcategory: {
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Category', 
     required: true,
   },
   description: {
     type: String,
     required: true,
   },
-  category: {
-    type: mongoose.Schema.Types.ObjectId, // Update to ObjectId type
-    ref: 'Category', // Reference to the 'Category' model
-    required: true,
-  },
+ 
   dateAdded: {
     type: Date,
     default: Date.now,

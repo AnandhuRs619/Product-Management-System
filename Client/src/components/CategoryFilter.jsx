@@ -1,3 +1,6 @@
+/* eslint-disable react/prop-types */
+
+
 import { useState } from "react";
 
 const CategoryFilter = ({ categoryData }) => {
@@ -16,7 +19,7 @@ const CategoryFilter = ({ categoryData }) => {
   };
 
   return (
-    <div className="ml-10 mt-6">
+    <div className="ml-10 p-10 mt-6 shadow-md">
       <div className="flex gap-x-8">
         <p className="font-semibold text-lg">Home</p>
         <ion-icon class="mt-2" name="chevron-forward-outline"></ion-icon>
@@ -47,8 +50,7 @@ const CategoryFilter = ({ categoryData }) => {
               className="text-lg font-medium mt-3"
             >
               <option value="">Select a subcategory</option>
-              {categoryData
-                .find((item) => item._id === selectedCategory)
+              {categoryData.find((item) => item._id === selectedCategory)
                 ?.subcategories.map((subItem) => (
                   <option key={subItem._id} value={subItem._id}>
                     {subItem.name}
