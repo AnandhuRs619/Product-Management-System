@@ -8,7 +8,9 @@ const NavBar = () => {
       <div className="bg-[#3f72ff] p-4">
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
           <div className="flex items-center mb-4 md:mb-0">
+          <Link to="/">
             <h1 className="text-white text-2xl font-semibold">My App</h1>
+             </Link>
             <div className="bg-white ml-4 p-2 rounded relative">
               <input
                 className="border-none w-full"

@@ -1,17 +1,18 @@
-import  { useState } from "react";
-// import useFetch from "../../hooks/useFetch";
+import { useState } from "react";
 
+const CategoryFilter = ({ categoryData }) => {
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedSubcategory, setSelectedSubcategory] = useState(null);
 
+  const handleCategoryChange = (e) => {
+    const categoryValue = e.target.value;
+    setSelectedCategory(categoryValue);
+    setSelectedSubcategory(null);
+  };
 
-const CategoryFilter = ({categoryData}) => {
-  const [expandedItems, setExpandedItems] = useState({});
-//   const { data } = useFetch("/get-subcategory");
-
-  const toggleSubcategories = (index) => {
-    setExpandedItems((prevExpanded) => ({
-      ...prevExpanded,
-      [index]: !prevExpanded[index],
-    }));
+  const handleSubcategoryChange = (e) => {
+    const subcategoryValue = e.target.value;
+    setSelectedSubcategory(subcategoryValue);
   };
 
   return (
@@ -25,39 +26,36 @@ const CategoryFilter = ({categoryData}) => {
         <p className="text-blue-500 font-medium text-xl">Categories</p>
         <p className="text-2xl mt-2">All Categories</p>
 
-        <div className="mt-3 gap-x-32">
-          {categoryData.map((item, index) => (
-            <div className="flex gap-x-32 mt-3" key={index}>
-              <ul className="text-lg font-medium">
-                <li>{item.name}</li>
-                {expandedItems[index] &&
-                  item.subcategories.map((subItem, subIndex) => (
-                    <div className="flex gap-x-4" key={subIndex}>
-                      <input
-                        type="checkbox"
-                        id="myCheckbox"
-                        name="myCheckbox"
-                        value="checkboxValue"
-                      ></input>
-                      <li className="font-light">{subItem.name}</li>
-                    </div>
-                  ))}
-              </ul>
-              <div onClick={() => toggleSubcategories(index)}>
-                {expandedItems[index] ? (
-                  <ion-icon
-                    className="text-xl"
-                    name="chevron-down-outline"
-                  ></ion-icon>
-                ) : (
-                  <ion-icon
-                    className="text-xl"
-                    name="chevron-forward-outline"
-                  ></ion-icon>
-                )}
-              </div>
-            </div>
-          ))}
+        <div className="mt-3 gap-x-32 flex flex-col">
+          <select
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+            className="text-lg font-medium"
+          >
+            <option value="">Select a category</option>
+            {categoryData.map((item) => (
+              <option key={item._id} value={item._id}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+
+          {selectedCategory && (
+            <select
+              value={selectedSubcategory}
+              onChange={handleSubcategoryChange}
+              className="text-lg font-medium mt-3"
+            >
+              <option value="">Select a subcategory</option>
+              {categoryData
+                .find((item) => item._id === selectedCategory)
+                ?.subcategories.map((subItem) => (
+                  <option key={subItem._id} value={subItem._id}>
+                    {subItem.name}
+                  </option>
+                ))}
+            </select>
+          )}
         </div>
       </div>
     </div>

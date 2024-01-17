@@ -18,7 +18,8 @@ const productSchema = mongoose.Schema({
     required: true,
   },
   subcategory: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId, // Update to ObjectId type
+    ref: 'Category', // Reference to the 'Category' model
     required: true,
   },
   description: {
@@ -26,7 +27,8 @@ const productSchema = mongoose.Schema({
     required: true,
   },
   category: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId, // Update to ObjectId type
+    ref: 'Category', // Reference to the 'Category' model
     required: true,
   },
   dateAdded: {
@@ -34,11 +36,10 @@ const productSchema = mongoose.Schema({
     default: Date.now,
   },
   imagePath: {
-    type:[String],
-    required: false,
+    type: [String],
+    required: true,
   },
-
 });
 
 const productModel = mongoose.model("Product", productSchema);
- module.exports=productModel
+module.exports = productModel;

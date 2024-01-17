@@ -3,17 +3,19 @@ import NavBar from '../components/NavBar';
 import { FaImage } from 'react-icons/fa';
 import axios from 'axios';
 import useProductfetch from "../hooks/useGetProductData";
+import { useNavigate } from 'react-router-dom';
 
 const AddProductPage = () => {
     const [productName, setProductName] = useState('');
     const [description, setDescription] = useState('');
     const [productImages, setProductImages] = useState([]); // Change to an array for multiple images
     const [price, setPrice] = useState('');
-    const [stock, setStock] = useState('');
+    const [total, setTotal] = useState('');
     const [ram, setRam] = useState('');
     const [category, setCategory] = useState('');
     const [subcategory, setSubcategory] = useState('');
     const { categoryData } = useProductfetch();
+    const navigate = useNavigate();
   
     const handleAddProduct = async (e) => {
       e.preventDefault();
@@ -26,30 +28,33 @@ const AddProductPage = () => {
         formData.append('subcategory', subcategory);
         formData.append('category', category);
         formData.append('description', description);
+        formData.append('total',total);
   
         // Append all images to the formData
-        productImages.forEach((image, index) => {
-          formData.append(`images[${index}]`, image, image.name);
+        productImages.forEach((image, ) => {
+          formData.append(`images`, image, );
         });
+
   
-        const config = {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        };
-  
-        await axios.post('http://localhost:5000/product', formData, config);
-  
-        console.log('Product added successfully');
+        const res =  await axios.post('http://localhost:5000/product', formData );
+
+        console.log(res,'Product added successfully');
+        navigate("/");
       } catch (error) {
         console.error('Error adding product:', error);
       }
     };
   
     const handleImageChange = (e) => {
-      const files = e.target.files;
-      setProductImages([...productImages, ...files]);
-    };
+        const files = e.target.files;
+        setProductImages([...productImages, ...files]);
+      };
+    
+      const handleImageRemove = (index) => {
+        const updatedImages = [...productImages];
+        updatedImages.splice(index, 1);
+        setProductImages(updatedImages);
+      };
 
   return (<>
   
@@ -105,12 +110,21 @@ const AddProductPage = () => {
           {/* Display added images in a row */}
           <div className="mt-4 flex flex-wrap">
             {productImages.map((image, index) => (
-              <img
-                key={index}
-                src={URL.createObjectURL(image)}
-                alt={`Product Image ${index + 1}`}
-                className="w-20 h-20 object-cover mr-2 mb-2 rounded-md"
-              />
+              <div key={index} className="relative mr-2 mb-2">
+                <img
+                  src={URL.createObjectURL(image)}
+                  alt={`Product Image ${index + 1}`}
+                  className="w-20 h-20 object-cover rounded-md cursor-pointer"
+                  onClick={() => handleImageRemove(index)}
+                />
+                <button
+                  type="button"
+                  onClick={() => handleImageRemove(index)}
+                  className="absolute top-0 right-0 p-1 bg-red-500 text-white rounded-full"
+                >
+                  X
+                </button>
+              </div>
             ))}
           </div>
         <div>
@@ -132,10 +146,10 @@ const AddProductPage = () => {
           </label>
           <input
             type="text"
-            id="stock"
-            name="stock"
-            value={stock}
-            onChange={(e) => setStock(e.target.value)}
+            id="total"
+            name="total"
+            value={total}
+            onChange={(e) => setTotal(e.target.value)}
             className="mt-1 p-2 border border-gray-300 rounded-md w-full"
           />
         </div>

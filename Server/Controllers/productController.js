@@ -1,5 +1,5 @@
 const productModel = require("../Models/productModel");
-const { Category, Subcategory } = require("../Models/categoryModel");
+const { Category} = require("../Models/categoryModel");
 
 const addProduct = async (req, res) => {
   try {
@@ -42,15 +42,20 @@ const addProduct = async (req, res) => {
 };
 
 const getProduct = async (req, res) => {
-  try {
-    const productData = await productModel.find();
-    console.log(productData);
-    res.json({ status: 200, data: productData });
-  } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-};
-
+    try {
+      const productData = await productModel
+        .find()
+        .populate('subcategory')
+        .populate('category');
+  
+      console.log(productData);
+  
+      res.json({ status: 200, data: productData });
+    } catch (error) {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  };
+  
 const getCategory = async (req, res) => {
   try {
     const categories = await Category.find().populate("subcategories");
