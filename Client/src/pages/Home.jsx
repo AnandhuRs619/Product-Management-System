@@ -1,6 +1,6 @@
 import CategoryFilter from "../components/CategoryFilter";
 import Navbar from "../components/NavBar";
-import Product from "../components/Products";
+
 import Card from "../components/cards";
 import useProductfetch from "../hooks/useGetProductData";
 
